@@ -24,7 +24,8 @@ app.use(
   })
 );
 app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
-app.use(compress());
+app.use(compress()); // This middleware compresses all the responses going through it. Remember to add it very high in your routing order so that all the requests are affected.
+app.use(cors()); // Allows cross-origin resource sharing (CORS) requests
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(root, '/dist/client/index.html'));
