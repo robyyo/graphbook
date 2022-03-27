@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import "../../assets/css/style.css";
 const initialPosts = [
   {
@@ -38,6 +39,12 @@ const App = () => {
   };
   return (
     <div className="container">
+      <Helmet>
+        <title>
+          Graphbook - Feed
+        </title>
+          <meta name="description" content="Newsfeed of all your friends on Graphbook"/>
+      </Helmet>
       <div className="postForm">
         <form onSubmit={handleSubmit}>
           <textarea
