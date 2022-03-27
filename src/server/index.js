@@ -3,6 +3,7 @@ import path from 'path';
 import helmet from 'helmet'; // Helmet is a tool that allows you to set various HTTP headers to help secure your application.
 import cors from 'cors';
 import compress from 'compression';
+import services from './services';
 
 const app = express();
 
@@ -26,6 +27,19 @@ app.use(
 app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
 app.use(compress()); // This middleware compresses all the responses going through it. Remember to add it very high in your routing order so that all the requests are affected.
 app.use(cors()); // Allows cross-origin resource sharing (CORS) requests
+
+const serviceNames = Object.keys(services);
+for (let i = 0; i < serviceNames.length; i += 1) {
+  const name = serviceNames[i];
+  if (name === 'graphql') {
+    (async () => {
+      await services[name].start();
+      services[name].applyMiddleware({ app });
+    })();
+  } else {
+    app.use('/${name}', services[name]); 
+  }
+}
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(root, '/dist/client/index.html'));
