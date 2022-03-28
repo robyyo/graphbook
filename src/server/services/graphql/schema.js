@@ -1,4 +1,4 @@
-const typeDefinitions = '
+const typeDefinitions = `
   type Post {
     id: Int
     text: String
@@ -9,5 +9,5 @@ const typeDefinitions = '
   schema {
     query: RootQuery
   }
-';
+`;
 export default [typeDefinitions];
