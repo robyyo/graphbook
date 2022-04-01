@@ -1,12 +1,17 @@
 const typeDefinitions = `
-  type Post {
-    id: Int
-    text: String
-  }
-  type RootQuery {
+type Post {
+  id: Int
+  user: User
+  text: String
+}
+type User {
+    avatar: String
+    username: String
+}
+type RootQuery {
     posts: [Post]
-  }
-  schema {
+}
+schema {
     query: RootQuery
   }
 `;
