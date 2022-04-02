@@ -4,28 +4,30 @@ type Post {
   user: User
   text: String
 }
+
 type User {
     avatar: String
     username: String
 }
+
+type RootQuery {
+    posts: [Post]
+}
+
 input PostInput {
   text: String!
 }
-input PostInput {
-  text: String!
-}
+
 input UserInput {
   username: String!
   avatar: String!
 }
-type RootQuery {
-    posts: [Post]
-}
+
 type RootMutation {
-  addPost {
+  addPost (
     post: PostInput!
     user: UserInput!
-  }: Post
+  ): Post
 }
 schema {
     query: RootQuery
